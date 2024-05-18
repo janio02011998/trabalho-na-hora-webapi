@@ -6,16 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint **/*.ts --fix",
-    "dev-user": "concurrently \"tsc -w\" \"nodemon -q dist/functions/api/bootstrap/user-api.js\"",
-    "build": "yarn run rimraf dist && tsc && tsc-alias",
-    "build:watch": "yarn run rimraf dist && tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")",
+    "build": "rimraf dist && tsc",
+    "build:watch": "rimraf dist && tsc && (concurrently \"tsc -w\")",
     "format": "prettier --write **/*.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev-user": "concurrently \"tsc -w\" \"nodemon -q dist/functions/api/bootstrap/user-api.js\""
   },
   "lint-staged": {
-    "*.{ts,js}": [
-      "eslint **/*.ts --fix",
-      "prettier --write **/*.ts"
+    "**/*.{js,ts}": [
+      "eslint **/*.ts --fix"
     ]
   },
   "keywords": [],
