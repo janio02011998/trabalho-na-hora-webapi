@@ -15,6 +15,7 @@ const app: Express = createExpressServer({
 });
 
 const API_PORT = process.env.API_USER_PORT;
+
 app.listen(API_PORT, async () => {
   // eslint-disable-next-line no-console
   console.log(`Listening on: ${API_PORT}`);
