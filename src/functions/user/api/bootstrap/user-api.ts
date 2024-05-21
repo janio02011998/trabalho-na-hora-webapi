@@ -1,10 +1,11 @@
-import { config } from 'dotenv';
+import 'dotenv/config';
 import { Express } from 'express';
 import { createExpressServer } from 'routing-controllers';
 
-import { UserControllerAuthorized } from '../../controllers/user.controller';
+import { ApiGatewayMiddleware } from '@app/shared/middleware';
+import { isAwsLambda, LoggerServiceHelper } from '@app/shared/service';
 
-config();
+import { UserControllerAuthorized } from '../../controllers/user.controller';
 
 const publicControllers = [UserControllerAuthorized];
 
@@ -14,9 +15,20 @@ const app: Express = createExpressServer({
   middlewares: [],
 });
 
-const API_PORT = process.env.API_USER_PORT;
+const startLocalServer = () => {
+  const port = process.env.API_USER_PORT;
+  app.listen(port, () => {
+    new LoggerServiceHelper().debug({ routes: app.routes }, 'app.routes');
+    new LoggerServiceHelper().debug(`Listening on: ${port}`);
+  });
+};
 
-app.listen(API_PORT, async () => {
-  // eslint-disable-next-line no-console
-  console.log(`Listening on: ${API_PORT}`);
-});
+const startLambdaServer = () => {
+  module.exports.handler = ApiGatewayMiddleware(app);
+};
+
+if (isAwsLambda()) {
+  startLambdaServer();
+} else {
+  startLocalServer();
+}
