@@ -30,35 +30,15 @@ module.exports = {
       'error',
       {
         groups: [
-          ['external', 'builtin'],
+          'external',
           'internal',
-          ['sibling', 'parent'],
+          'parent',
           'index',
         ],
         pathGroups: [
           {
-            pattern: '@nestjs/**',
+            pattern: 'aws*',
             group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: '@app/configs/**',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@app/database/**',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@app/models/**',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@app/functions/**',
-            group: 'internal',
             position: 'before',
           },
           {
@@ -71,7 +51,7 @@ module.exports = {
             group: 'internal',
           },
         ],
-        pathGroupsExcludedImportTypes: ['internal', 'react'],
+        pathGroupsExcludedImportTypes: ['internal'],
         'newlines-between': 'always',
         alphabetize: {
           order: 'asc',
