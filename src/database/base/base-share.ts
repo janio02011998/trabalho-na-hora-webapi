@@ -4,7 +4,7 @@ import { ILoggerServiceHelper, LoggerServiceHelper } from '@app/shared/service';
 
 import { IDatabase } from './base-interface';
 
-export class BaseShare<DTO> {
+export class BaseShared<DTO> {
   public readonly loggerService: ILoggerServiceHelper;
 
   constructor(readonly database: IDatabase<DTO>) {
