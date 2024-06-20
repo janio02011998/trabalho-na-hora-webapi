@@ -18,7 +18,6 @@ const app: Express = createExpressServer({
 const startLocalServer = () => {
   const port = process.env.API_USER_PORT;
   app.listen(port, () => {
-    new LoggerServiceHelper().debug({ routes: app.routes }, 'app.routes');
     new LoggerServiceHelper().debug(`Listening on: ${port}`);
   });
 };
