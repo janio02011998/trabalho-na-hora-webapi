@@ -1,7 +1,7 @@
 import 'dotenv/config';
 
 /**
- * @description Identifica a variável de ambiente, se null define como 'dev'
+ * @description Identifies the environment variable, if null defines as 'dev'
  */
 export function getEnvNode(): string {
   return process.env.NODE_ENV;
